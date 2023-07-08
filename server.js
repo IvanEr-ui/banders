@@ -8,6 +8,7 @@ require('dotenv').config();
 const index_route = require('./routes/index_route.js');
 const article_route = require('./routes/article_route.js');
 const search_route = require('./routes/search_route.js');
+const port = process.env.PORT || 3000;
 
 //создаем приложение, которая будет работать на фреймворке express
 const app = express();
@@ -36,7 +37,7 @@ const start = async () => {
         //подключаемся к БД и ждем пока он не выполниться(await)
         await mongoose.connect(`mongodb+srv://${process.env.MONGO_NAME}:${process.env.MONGO_PASSWORD}@cluster0.dylfptx.mongodb.net/BandProtocol`);
         //запускаем сервер
-        app.listen(process.env.PORT, (error) => {
+        app.listen(port, (error) => {
             error ? console.log(error) : console.log(`listening port ${process.env.PORT}`)
         })
     }
