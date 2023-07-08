@@ -1,0 +1,41 @@
+<%SearchArticlesResult=SearchArticlesResult.reverse()%>
+    <!--Вывод статей-->
+    <% if( SearchArticlesResult.length) {%>
+
+        <% SearchArticlesResult.forEach( ({class_article,link,title,description,autor,date,image,urlQuery})=> { %>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 <%= class_article %>">
+                <article>
+                    <a href="<%-DomainName%><%= urlQuery %>">
+                        <img src="https://blog.bandprotocol.com<%= image %>" width="415px" height="200px"
+                            style="border-radius: 10px;">
+                    </a>
+                    <div>
+                        <div class="title" style="margin: 0 0 5px 0;"><a href="<%-DomainName%><%= urlQuery %>"><strong>
+                                    <%= title %>
+                                </strong></a></div>
+
+                        <div class="description">
+                            <p>
+                                <%= description %>
+                            </p>
+                        </div>
+
+
+                        <div class="autordate">
+                            <font>
+                                <a style="color:rgb(48, 213, 200)">
+                                    <%= autor %>
+                                </a>
+                                <font class="date" style="color:#4520E6">
+                                    <%= date %>
+                                </font>
+                            </font>
+                        </div>
+
+
+
+                    </div>
+                </article>
+            </div>
+            <% }) %>
+                <% } %>

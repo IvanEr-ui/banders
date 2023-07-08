@@ -1,0 +1,86 @@
+<div class="col-lg-4 .d-sm-none .d-none .d-md-block" style="color:white; padding: 100px 0 0 0;">
+    <div class="accordion accordion-flush navmenu" id="accordionFlushExample">
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <%=filter.All%> <%=categories%>
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Update"><%=filter.Update%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Bandchain"><%=filter.Bandchain%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Integration"><%=filter.Integration%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Product"><%=filter.Product%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Oracle"><%=filter.Oracle%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Community"><%=filter.Community%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=Partners"><%=filter.Partners%></a></div>
+                    <div><a target="_blank" href="<%=actionFormSearch%>?resText=VRF"><%=filter.VRF%></a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <%= navmenu.about.title%>
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <%= navmenu.about.description%>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    <%= navmenu.oracle.title%>
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <%= navmenu.oracle.description%>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    <%= navmenu.use_cases.title%>
+                </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <%= navmenu.use_cases.description%>
+                </div>
+            </div>
+        </div>
+
+        <div class="social_links" style="margin: 50px 0 20px 10px; padding: 0;">
+            <a target="_blank" href="https://github.com/bandprotocol"><img src="/images/svg/github.svg" width=' 45'
+                    height='30' alt="Github"></a>
+            <a target="_blank" href="https://twitter.com/BandProtocol"><img src="/images/svg/twitter.svg" width='45'
+                    height='30' alt="Twitter"></a>
+            <a target="_blank" href="https://t.me/bandprotocol"><img src="/images/svg/telegram.svg" width='45'
+                    height='30' alt="Telegram"></a>
+            <a target="_blank" href="https://discord.gg/pFWn4nnA"><img src="/images/svg/discord.svg" width='45'
+                    height='30' alt="Discord"></a>
+            <a target="_blank" href="https://cryptorank.io/price/band-protocol"><img src="/images/svg/cryptorank.svg"
+                    width='45' height='30' alt="Cryptorank"></a>
+        </div>
+    </div>
+
+</div>
+

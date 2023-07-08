@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%-include('../partials/head.ejs')%>
+    <link rel="stylesheet" href="/css/article.css">
+
+    <body style="background-color: #151719;">
+        <%-include('../partials/navbar.ejs')%>
+            <div class="container">
+                <div class="row" style="margin: 0 5px 0 5px;">
+                    <%-include('../partials/articleContent.ejs')%>
+                    <%-include('../partials/navmenu.ejs')%>
+                </div>
+            </div>
+
+            <!--Bootstrap JS-->
+            <script src="/js/bootstrap.bundle.js"></script>
+            <!-- jquery -->
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/isotope.min.js"></script>
+            <!-- files js -->
+            <script src="/js/navbar.js"></script>
+    </body>
+
+</html>
