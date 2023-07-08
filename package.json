@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "@vercel/node": "^2.15.3",
     "bootstrap": "^5.3.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
