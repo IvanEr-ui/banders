@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "version": 2,
     "builds": [
       {
@@ -8,13 +7,3 @@
       }
     ]
 }
-=======
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "vercel-sapper"
-    }
-  ]
-}
->>>>>>> 29251d5dffc0ab3c50217277e405599a9b1cfc02
