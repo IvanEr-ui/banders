@@ -24,7 +24,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js/'))
 app.use('/dist', express.static(__dirname + '/node_modules/jquery/dist/'))
 //предоставляем доступ к папке public где находятся css,js,static images шаблонизаторов
 app.use(express.static(__dirname + '/views/public'))
-
+const port = process.env.PORT || 4000;
 
 //подключаем routes
 app.use(search_route);
@@ -36,7 +36,7 @@ const start = async () => {
         //подключаемся к БД и ждем пока он не выполниться(await)
         await mongoose.connect(`mongodb+srv://${process.env.MONGO_NAME}:${process.env.MONGO_PASSWORD}@cluster0.dylfptx.mongodb.net/BandProtocol`);
         //запускаем сервер
-        app.listen(process.env.PORT, (error) => {
+        app.listen(port, (error) => {
             error ? console.log(error) : console.log(`listening port ${process.env.PORT}`)
         })
     }
@@ -47,4 +47,3 @@ const start = async () => {
 }
 
 start();
-module.exports = app;
