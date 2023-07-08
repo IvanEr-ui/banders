@@ -8,7 +8,6 @@ require('dotenv').config();
 const index_route = require('./routes/index_route.js');
 const article_route = require('./routes/article_route.js');
 const search_route = require('./routes/search_route.js');
-const port = process.env.PORT || 3000;
 
 //создаем приложение, которая будет работать на фреймворке express
 const app = express();
@@ -25,7 +24,7 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js/'))
 app.use('/dist', express.static(__dirname + '/node_modules/jquery/dist/'))
 //предоставляем доступ к папке public где находятся css,js,static images шаблонизаторов
 app.use(express.static(__dirname + '/views/public'))
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 //подключаем routes
 app.use(search_route);
@@ -37,7 +36,7 @@ const start = async () => {
         //подключаемся к БД и ждем пока он не выполниться(await)
         await mongoose.connect(`mongodb+srv://${process.env.MONGO_NAME}:${process.env.MONGO_PASSWORD}@cluster0.dylfptx.mongodb.net/BandProtocol`);
         //запускаем сервер
-        app.listen(port, (error) => {
+        app.listen(PORT, (error) => {
             error ? console.log(error) : console.log(`listening port ${process.env.PORT}`)
         })
     }
