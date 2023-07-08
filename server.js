@@ -8,6 +8,7 @@ require('dotenv').config();
 const index_route = require('./routes/index_route.js');
 const article_route = require('./routes/article_route.js');
 const search_route = require('./routes/search_route.js');
+const port = process.env.PORT || 3000;
 
 //создаем приложение, которая будет работать на фреймворке express
 const app = express();
