@@ -2,6 +2,7 @@
     "version": 2,
     "builds": [
       {
+<<<<<<< HEAD
         "src": "./server.js",
         "use": "@vercel/node"
       }
@@ -13,3 +14,10 @@
       }
     ]
 }
+=======
+        "src": "*.js",
+        "use": "@vercel/node"
+      }
+    ]
+}
+>>>>>>> 9dde7835bb12dbc99803962cee41625c95fa078d
