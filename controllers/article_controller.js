@@ -22,7 +22,7 @@ const addRuArticles = async (ArticleParse) =>{
     await ruarticle.save();
 }
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class articleController {
     async ArticleEn(req, res) {

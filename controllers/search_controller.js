@@ -2,7 +2,7 @@ const { createPath_search } = require('../path/create-path')
 const EnArticles = require('../models/enarticles_model')
 const RuArticles = require('../models/ruarticles_model')
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class searchController {
     async SearchArticlesEn(req, res) {

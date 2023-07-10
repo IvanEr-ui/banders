@@ -3,7 +3,7 @@ const EnArticles = require('../models/enarticles_model')
 const RuArticles = require('../models/ruarticles_model')
 const Filter = require('../models/filter_model')
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class indexController {
     async ArticlesEn(req, res) {
