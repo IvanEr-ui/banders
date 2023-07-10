@@ -15,7 +15,7 @@ const app = express();
 //указываем шаблонизатор, которая позволяет динамически рендерить данные
 app.set('view engine', 'ejs');
 //указываем папку, где находятся наши шаблонизаторы
-app.set('views', 'views');
+app.set('views', './views');
 
 //предоставляем доступ к Bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css/'))
