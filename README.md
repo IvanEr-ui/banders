@@ -15,5 +15,5 @@ Roadmap (in progress), sketches:
 
 The project was developed on the principle of MVC (model-view-controller)
 
-Technologies used: node.js, ejs, express, mongoose
+Technologies used: node.js, ejs, express, mongoose, mongoDB
 ![Banders](https://github.com/IvanEr-ui/banders/assets/79088192/f40e7890-1d62-40ba-8950-528030590c1e)
