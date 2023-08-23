@@ -52,6 +52,23 @@
     background-size: 100%;
 }
 
+/*Discord*/
+.auth2_discord {
+    height: 40px;
+    width: 250px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Arial', Arial, sans-serif;
+    line-height: 1.55;
+    font-weight: 600;
+    border-radius: 30px;
+    background-color: #8080ff;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
 /*Контент статьи*/
 .contentArticle img {
     height: 100%; 

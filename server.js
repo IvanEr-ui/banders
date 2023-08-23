@@ -8,6 +8,9 @@ require('dotenv').config();
 const index_route = require('./routes/index_route.js');
 const article_route = require('./routes/article_route.js');
 const search_route = require('./routes/search_route.js');
+const auth_route = require('./routes/auth_route.js');
+const profile_route = require('./routes/profile_route.js');
+const ScriptArticles = require('./parser/parser.js'); // Импортируем функцию из scraping.js
 
 //создаем приложение, которая будет работать на фреймворке express
 const app = express();
@@ -24,13 +27,17 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js/'))
 app.use('/dist', express.static(__dirname + '/node_modules/jquery/dist/'))
 //предоставляем доступ к папке public где находятся css,js,static images шаблонизаторов
 app.use(express.static(__dirname + '/views/public'))
-const port = process.env.PORT || 4000;
+
 
 //подключаем routes
+app.use(profile_route);
+app.use(auth_route);
 app.use(search_route);
 app.use(index_route);
 app.use(article_route);
 
+// Запускаем веб-скрапинг и сохранение данных в MongoDB каждый час
+setInterval(ScriptArticles, 7 * 24 * 60 * 60 * 1000); // Каждую неделю
 const start = async () => {
     try {
         //подключаемся к БД и ждем пока он не выполниться(await)
