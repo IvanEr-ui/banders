@@ -4,12 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --ignore 'parser/**' server.js"
+    "dev": "nodemon server.js --ignore parser/",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.1"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,7 +21,7 @@
     "jquery": "^3.7.0",
     "mongodb": "^5.6.0",
     "mongoose": "^7.2.2",
-    "puppeteer": "^20.0.0",
+    "puppeteer": "20.0.0",
     "redstone-api": "^0.4.11",
     "unirest": "^0.6.0"
   }
