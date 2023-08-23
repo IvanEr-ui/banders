@@ -12,7 +12,6 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
-    "@vercel/node": "^2.15.3",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.0",
     "dotenv": "^16.3.1",
