@@ -36,18 +36,7 @@
         </form>
 
   
-          <button class="d-flex auth2_discord" onclick="oauth2();">
-            <img src="/images/svg/discord.svg" style="height: 35px; width: 45px" alt="discord">
-            <div style="padding: 7px 0 0 3px ;">Войти c помощью Discord</div>
-          </button>
       </div>
     </div>
   </nav>
 </div>
-
-<script>
-  function oauth2(){
-    location.replace("https://discord.com/api/oauth2/authorize?client_id=1130916586690183198&redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fprofile&response_type=code&scope=identify");
-  }
-  
-</script>

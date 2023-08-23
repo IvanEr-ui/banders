@@ -1,6 +1,7 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 const { connect } = require('mongoose');
+
 // Путь к вашей модели статей
 const EnArticleModel = require('../models/enarticles_model');
 const RuArticleModel = require('../models/ruarticles_model')
@@ -152,11 +153,6 @@ const InterimChangestranslateJSON = async (allArticlesBPEn, allArticlesBPLang, T
     return allArticlesBPLang;
 }
 
-
-
-
-
-
 async function scrapeAndSaveArticles() {
     // Запуск браузера Puppeteer
     const browser = await puppeteer.launch({
@@ -165,7 +161,6 @@ async function scrapeAndSaveArticles() {
         //открываем инструменты разработчика
         devtools: true
     });
-    const page = await browser.newPage();
 
     try {
         //парсим и получаем статьи в переменную allArticlesBP 
