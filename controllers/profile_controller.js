@@ -10,27 +10,6 @@ class profileController {
             console.log(e);
         }
     }
-    async profileRu(req, res) {
-        try {
-            res.render(createPath_profile("profile"), {})
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async profileFr(req, res) {
-        try {
-            res.render(createPath_profile("profile"), {})
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async profileGr(req, res) {
-        try {
-            res.render(createPath_profile("profile"), {})
-        } catch (e) {
-            console.log(e);
-        }
-    }
 }
 
 module.exports = new profileController();

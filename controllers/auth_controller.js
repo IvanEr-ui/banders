@@ -1,5 +1,5 @@
 const { createPath_profile, createPath_index } = require('../path/create-path')
-const EnArticles = require('../models/enarticles_model')
+const EnArticles = require('../models/languages/enarticles_model')
 const Filter = require('../models/filter_model')
 const unirest = require('unirest')
 

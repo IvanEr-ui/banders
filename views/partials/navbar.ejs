@@ -11,7 +11,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0  offset-md-5">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0  offset-md-8">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
@@ -20,8 +20,14 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/">English</a></li>
               <li><a class="dropdown-item" href="/ru">Russia</a></li>
-              <li><a class="dropdown-item" href="/fr">France</a></li>
-              <li><a class="dropdown-item" href="/gr">Germany</a></li>
+              <li><a class="dropdown-item" href="/de">German</a></li>
+              <li><a class="dropdown-item" href="/es">Spanish</a></li>
+              <li><a class="dropdown-item" href="/et">Estonian</a></li>
+              <li><a class="dropdown-item" href="/ja">Japan</a></li>
+              <li><a class="dropdown-item" href="/th">Thai</a></li>
+              <li><a class="dropdown-item" href="/pt">Portuguese</a></li>
+              <li><a class="dropdown-item" href="/tr">Turkish</a></li>
+              <li><a class="dropdown-item" href="/uk">Ukrainian</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -35,19 +41,7 @@
               src="/images/svg/magnifier.svg" width="20px" height="20px"></button>
         </form>
 
-  
-          <button class="d-flex auth2_discord" onclick="oauth2();">
-            <img src="/images/svg/discord.svg" style="height: 35px; width: 45px" alt="discord">
-            <div style="padding: 7px 0 0 3px ;">Войти c помощью Discord</div>
-          </button>
       </div>
     </div>
   </nav>
 </div>
-
-<script>
-  function oauth2(){
-    location.replace("https://discord.com/api/oauth2/authorize?client_id=1130916586690183198&redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fprofile&response_type=code&scope=identify");
-  }
-  
-</script>

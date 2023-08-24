@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js --ignore parser/",
+    "dev": "nodemon server.js --ignore parser/BandProtocols/",
     "start": "node server.js"
   },
   "author": "",

@@ -3,10 +3,21 @@ const router = express.Router();
 //подключаем контроллер
 const articleController = require('../controllers/article_controller')
 
-//страница статьи
-router.get('/:urlArticle', articleController.ArticleEn);
-router.get('/ru/:urlArticle', articleController.ArticleRu);
-router.get('/fr/:urlArticle', articleController.ArticleFr);
-router.get('/gr/:urlArticle', articleController.ArticleGr);
+const supportedLanguages = [
+    '', 'ru', 'fr', 'de', 'es', 'et', 'ja', 'th', 'pt', 'tr', 'uk'
+];
 
+// Генерация маршрутов для разных языков
+supportedLanguages.forEach(language => {
+    (async () => {
+        if (language === '') {
+            const article = await articleController.Article(language);
+            router.get(`${language}/:urlArticle`, article);
+        }
+        else{
+            const article = await articleController.Article(language);
+            router.get(`/${language}/:urlArticle`, article);
+        }
+    })()
+});
 module.exports = router;

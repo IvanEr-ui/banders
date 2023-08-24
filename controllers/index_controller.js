@@ -1,61 +1,51 @@
-const {createPath_index} = require('../path/create-path')
-const EnArticles = require('../models/enarticles_model')
-const RuArticles = require('../models/ruarticles_model')
-const FrArticles = require('../models/frarticles_model')
-const GrArticles = require('../models/grarticles_model')
-const Filter = require('../models/filter_model')
-const redstone = require('redstone-api');
+const { createPath_index } = require('../path/create-path');
+const Filter = require('../models/filter_model');
+const DomainName = "http://localhost:4000/";
 
-
-const DomainName = "http://localhost:4000/"
+const Articles = [
+    { code: '', categories: "categories", model: 'enarticles_model' },
+    { code: 'ru', categories: "категории", model: 'ruarticles_model' },
+    { code: 'fr', categories: "catégories", model: 'frarticles_model' },
+    { code: 'de', categories: "kategorien", model: 'dearticles_model' },
+    { code: 'es', categories: "categorías", model: 'esarticles_model' },
+    { code: 'et', categories: "kategooriad", model: 'etarticles_model' },
+    { code: 'ja', categories: "カテゴリー", model: 'jaarticles_model' },
+    { code: 'th', categories: "หมวดหมู่", model: 'tharticles_model' },
+    { code: 'pt', categories: "categorias", model: 'ptarticles_model' },
+    { code: 'tr', categories: "kategoriler", model: 'trarticles_model' },
+    { code: 'uk', categories: "категорії", model: 'ukarticles_model' },
+];
 
 class indexController {
-    async ArticlesEn(req, res) {
-        try {
-            let actionFormSearch = `${DomainName}search`;
-            const articlesClient = await EnArticles.find({})
-            console.log(articlesClient)
-            let filter = await Filter.find({language:"en"});
-            //читаем файл html и загружаем данные из БД коллекции articles,indexes
-            res.render(createPath_index("index"), { articlesClient,DomainName,actionFormSearch,filter:filter[0] })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticlesRu(req, res) {
-        try {
-            let actionFormSearch = `${DomainName}ru/search`;
-            //получаем данные с БД
-            const articlesClient = await RuArticles.find({})
+    async loadLanguageModel(modelPath) {
+        return require(`../models/languages/${modelPath}`);
+    };
 
-            let filter = await Filter.find({language:"ru"});
-            res.render(createPath_index('index'), { articlesClient,DomainName,actionFormSearch,filter:filter[0] });
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticlesFr(req, res) {
-        try {
-            let actionFormSearch = `${DomainName}fr/search`;
-            //получаем данные с БД
-            const articlesClient = await FrArticles.find({})
-            let filter = await Filter.find({language:"ru"});
-            res.render(createPath_index('index'), { articlesClient,DomainName,actionFormSearch,filter:filter[0] });
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticlesGr(req, res) {
-        try {
-            let actionFormSearch = `${DomainName}gr/search`;
-            //получаем данные с БД
-            const articlesClient = await GrArticles.find({})
-            let filter = await Filter.find({language:"ru"});
-            res.render(createPath_index('index'), { articlesClient,DomainName,actionFormSearch,filter:filter[0] });
-        } catch (e) {
-            console.log(e);
-        }
+    // Функция-обработчик для создания маршрутов для разных языков
+    async indexArticle(lang) {
+        return async (req, res) =>{
+            try {
+                const currentArticle = Articles.find(article => article.code === lang);
+                const { model } = currentArticle;
+
+
+                let actionFormSearch = `${DomainName}${lang}/search`;
+                let filter = await Filter.find({ language: lang });
+                if (lang === '') {
+                    actionFormSearch = `${DomainName}search`;
+                    filter = await Filter.find({ language: "en" });
+                }
+                const languageModel = await this.loadLanguageModel(model);
+                const articlesClient = await languageModel.find({});
+
+                //читаем файл html и загружаем данные из БД коллекции articles,indexes
+                res.render(createPath_index("index"), { articlesClient, DomainName, actionFormSearch, filter: filter[0] })
+            } catch (err) {
+                console.log(err);
+            }
+        };
     }
 }
+
 
 module.exports = new indexController();

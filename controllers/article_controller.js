@@ -1,83 +1,68 @@
-const { createPath_article } = require('../path/create-path')
-const EnArticles = require('../models/enarticles_model')
-const RuArticles = require('../models/ruarticles_model')
-const FrArticles = require('../models/frarticles_model')
-const GrArticles = require('../models/grarticles_model')
-const Filter = require('../models/filter_model')
-const NavMenu = require('../models/navmenu_model')
+const { createPath_article } = require('../path/create-path');
+const Filter = require('../models/filter_model');
+const NavMenu = require('../models/navmenu_model');
+const DomainName = "http://localhost:4000/";
 
-const fs = require('fs');
-
-const DomainName = "http://localhost:4000/"
+const Articles = [
+    { code: '', categories: "categories", model: 'enarticles_model' },
+    { code: 'ru', categories: "категории", model: 'ruarticles_model' },
+    { code: 'fr', categories: "catégories", model: 'frarticles_model' },
+    { code: 'de', categories: "kategorien", model: 'dearticles_model' },
+    { code: 'es', categories: "categorías", model: 'esarticles_model' },
+    { code: 'et', categories: "kategooriad", model: 'etarticles_model' },
+    { code: 'ja', categories: "カテゴリー", model: 'jaarticles_model' },
+    { code: 'th', categories: "หมวดหมู่", model: 'tharticles_model' },
+    { code: 'pt', categories: "categorias", model: 'ptarticles_model' },
+    { code: 'tr', categories: "kategoriler", model: 'trarticles_model' },
+    { code: 'uk', categories: "категорії", model: 'ukarticles_model' },
+];
 
 class articleController {
-    async ArticleEn(req, res) {
-        try {
-            const categories = "categories";
-            let actionFormSearch = `${DomainName}search`;
-            const articlesClient = await EnArticles.find({});
-            let filter = await Filter.find({ language: "en" });
-            let navmenu = await NavMenu.find({ language: "en" });
-            for (let i = 0; i < articlesClient.length; i++) {
-                if (articlesClient[i].urlQuery == req.params.urlArticle) {
-                    let article = articlesClient[i];
-                    res.render(createPath_article("article"), { article, DomainName, actionFormSearch, filter: filter[0], navmenu: navmenu[0], categories });
+    async loadLanguageModel(modelPath) {
+        return require(`../models/languages/${modelPath}`);
+    };
+
+    // Функция-обработчик для создания маршрутов для разных языков
+    async Article(lang) {
+        return async (req, res) => {
+            try {
+                const currentArticle = Articles.find(article => article.code === lang);
+                const { categories, model } = currentArticle;
+
+                let filter = await Filter.find({ language: lang });
+                let navmenu = await NavMenu.find({ language: lang });
+                let actionFormSearch = `${DomainName}${lang}/search`;
+                if (lang === '') {
+                    filter = await Filter.find({ language: 'en' });
+                    navmenu = await NavMenu.find({ language: 'en' });
+                    actionFormSearch = `${DomainName}search`;
                 }
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticleRu(req, res) {
-        try {
-            const categories = "категории";
-            let actionFormSearch = `${DomainName}ru/search`;
-            const articlesClient = await RuArticles.find({})
-            let filter = await Filter.find({ language: "ru" });
-            let navmenu = await NavMenu.find({ language: "ru" });
-            for (let i = 0; i < articlesClient.length; i++) {
-                if (articlesClient[i].urlQuery.slice(3, articlesClient[i].urlQuery.length) == req.params.urlArticle) {
-                    let article = articlesClient[i];
-                    res.render(createPath_article("article"), { article, DomainName, actionFormSearch, filter: filter[0], navmenu: navmenu[0], categories });
+
+
+                const languageModel = await this.loadLanguageModel(model);
+                const articlesClient = await languageModel.find({});
+
+                const matchingArticle = await articlesClient.find(article => {
+                    if (lang === '') {
+                        return article.urlQuery === req.params.urlArticle
+                    }
+                    else {
+                        return article.urlQuery === (`${lang}/` + req.params.urlArticle)
+                    }
                 }
+                );
+                res.render(createPath_article("article"), {
+                    article: matchingArticle,
+                    DomainName,
+                    actionFormSearch,
+                    filter: filter[0],
+                    navmenu: navmenu[0],
+                    categories
+                });
+            } catch (err) {
+                console.log(err);
             }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticleFr(req, res) {
-        try {
-            const categories = "категории";
-            let actionFormSearch = `${DomainName}fr/search`;
-            const articlesClient = await FrArticles.find({})
-            let filter = await Filter.find({ language: "ru" });
-            let navmenu = await NavMenu.find({ language: "ru" });
-            for (let i = 0; i < articlesClient.length; i++) {
-                if (articlesClient[i].urlQuery.slice(3, articlesClient[i].urlQuery.length) == req.params.urlArticle) {
-                    let article = articlesClient[i];
-                    res.render(createPath_article("article"), { article, DomainName, actionFormSearch, filter: filter[0], navmenu: navmenu[0], categories });
-                }
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async ArticleGr(req, res) {
-        try {
-            const categories = "категории";
-            let actionFormSearch = `${DomainName}gr/search`;
-            const articlesClient = await GrArticles.find({})
-            let filter = await Filter.find({ language: "ru" });
-            let navmenu = await NavMenu.find({ language: "ru" });
-            for (let i = 0; i < articlesClient.length; i++) {
-                if (articlesClient[i].urlQuery.slice(3, articlesClient[i].urlQuery.length) == req.params.urlArticle) {
-                    let article = articlesClient[i];
-                    res.render(createPath_article("article"), { article, DomainName, actionFormSearch, filter: filter[0], navmenu: navmenu[0], categories });
-                }
-            }
-        } catch (e) {
-            console.log(e);
-        }
+        };
     }
 }
 

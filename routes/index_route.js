@@ -1,12 +1,17 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-//подключаем контроллер
-const indexController = require('../controllers/index_controller')
 
-//основная страница
-router.get('/', indexController.ArticlesEn);
-router.get('/ru', indexController.ArticlesRu);
-router.get('/fr', indexController.ArticlesFr);
-router.get('/gr', indexController.ArticlesGr);
+const indexController = require('../controllers/index_controller.js');
+
+const supportedLanguages = [
+    '', 'ru', 'fr', 'de', 'es', 'et', 'ja', 'th', 'pt', 'tr', 'uk'
+];
+
+supportedLanguages.forEach(language => {
+    (async () => {
+        const index = await indexController.indexArticle(language);
+        router.get(`/${language}`, index);
+    })()
+});
 
 module.exports = router;

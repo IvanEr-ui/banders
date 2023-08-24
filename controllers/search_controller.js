@@ -1,101 +1,57 @@
 const { createPath_search } = require('../path/create-path')
-const EnArticles = require('../models/enarticles_model')
-const RuArticles = require('../models/ruarticles_model')
-const FrArticles = require('../models/frarticles_model')
-const GrArticles = require('../models/grarticles_model')
+
+const Articles = [
+    { code: '', categories: "categories", model: 'enarticles_model' },
+    { code: 'ru', categories: "категории", model: 'ruarticles_model' },
+    { code: 'fr', categories: "catégories", model: 'frarticles_model' },
+    { code: 'de', categories: "kategorien", model: 'dearticles_model' },
+    
+    { code: 'es', categories: "categorías", model: 'esarticles_model' },
+    { code: 'et', categories: "kategooriad", model: 'etarticles_model' },
+    { code: 'ja', categories: "カテゴリー", model: 'jaarticles_model' },
+    { code: 'th', categories: "หมวดหมู่", model: 'tharticles_model' },
+    { code: 'pt', categories: "categorias", model: 'ptarticles_model' },
+    { code: 'tr', categories: "kategoriler", model: 'trarticles_model' },
+    { code: 'uk', categories: "категорії", model: 'ukarticles_model' },
+];
 
 const DomainName = "http://localhost:4000/"
 
 class searchController {
-    async SearchArticlesEn(req, res) {
-        try {
-            //введенное клиентом текст в поисковой строке
-            const text = req.query.resText.toLowerCase();
-            let actionFormSearch = `${DomainName}search`;
-            const SearchArticlesResult = [];
-            //получаем данные(статьи) из БД
-            const articlesClient = await EnArticles.find({})
-            for (let i = 0; i < articlesClient.length; i++) {
-                //если найдем найденное слово в свойства content и title
-                if ((articlesClient[i].content).search(text) > -1
-                    || (articlesClient[i].title).search(text) > -1
-                    || (articlesClient[i].class_article).search(text) > -1) {
-                    SearchArticlesResult.push(articlesClient[i])
-                }
-            }
-            //читаем файл html и загружаем данные из БД коллекции articles,indexes
-            res.render(createPath_search('search'), { DomainName, actionFormSearch, text, SearchArticlesResult })
+    async loadLanguageModel(modelPath) {
+        return require(`../models/languages/${modelPath}`);
+    };
 
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    async SearchArticlesRu(req, res) {
-        try {
-            //введенное клиентом текст в поисковой строке
-            const text = req.query.resText.toLowerCase();
-            let actionFormSearch = `${DomainName}ru/search`;
-            const SearchArticlesResult = [];
-            //получаем данные(статьи) из БД
-            const articlesClient = await RuArticles.find({})
-            for (let i = 0; i < articlesClient.length; i++) {
-                //если найдем найденное слово в свойства content и title
-                if ((articlesClient[i].content).search(text) > -1
-                    || (articlesClient[i].title).search(text) > -1
-                    || (articlesClient[i].class_article).search(text) > -1) {
-                    SearchArticlesResult.push(articlesClient[i])
-                }
-            }
-            //читаем файл html и загружаем данные из БД коллекции articles,indexes
-            res.render(createPath_search('search'), { DomainName, actionFormSearch, text, SearchArticlesResult })
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    async SearchArticle(lang) {
+        return async (req, res) => {
+            try {
+                const currentArticle = Articles.find(article => article.code === lang);
+                const { model } = currentArticle;
 
-    async SearchArticlesFr(req, res) {
-        try {
-            //введенное клиентом текст в поисковой строке
-            const text = req.query.resText.toLowerCase();
-            let actionFormSearch = `${DomainName}fr/search`;
-            const SearchArticlesResult = [];
-            //получаем данные(статьи) из БД
-            const articlesClient = await FrArticles.find({})
-            for (let i = 0; i < articlesClient.length; i++) {
-                //если найдем найденное слово в свойства content и title
-                if ((articlesClient[i].content).search(text) > -1
-                    || (articlesClient[i].title).search(text) > -1
-                    || (articlesClient[i].class_article).search(text) > -1) {
-                    SearchArticlesResult.push(articlesClient[i])
+                //введенное клиентом текст в поисковой строке
+                const text = req.query.resText.toLowerCase();
+                let actionFormSearch = `${DomainName}${lang}/search`;
+                if (lang === '') {
+                    actionFormSearch = `${DomainName}search`;
                 }
-            }
-            //читаем файл html и загружаем данные из БД коллекции articles,indexes
-            res.render(createPath_search('search'), { DomainName, actionFormSearch, text, SearchArticlesResult })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async SearchArticlesGr(req, res) {
-        try {
-            //введенное клиентом текст в поисковой строке
-            const text = req.query.resText.toLowerCase();
-            let actionFormSearch = `${DomainName}gr/search`;
-            const SearchArticlesResult = [];
-            //получаем данные(статьи) из БД
-            const articlesClient = await GrArticles.find({})
-            for (let i = 0; i < articlesClient.length; i++) {
-                //если найдем найденное слово в свойства content и title
-                if ((articlesClient[i].content).search(text) > -1
-                    || (articlesClient[i].title).search(text) > -1
-                    || (articlesClient[i].class_article).search(text) > -1) {
-                    SearchArticlesResult.push(articlesClient[i])
+                const SearchArticlesResult = [];
+                //получаем данные(статьи) из БД
+                const languageModel = await this.loadLanguageModel(model);
+                const articlesClient = await languageModel.find({});
+                for (let i = 0; i < articlesClient.length; i++) {
+                    //если найдем найденное слово в свойства content и title
+                    if ((articlesClient[i].content).search(text) > -1
+                        || (articlesClient[i].title).search(text) > -1
+                        || (articlesClient[i].class_article).search(text) > -1) {
+                        SearchArticlesResult.push(articlesClient[i])
+                    }
                 }
+                //читаем файл html и загружаем данные из БД коллекции articles,indexes
+                res.render(createPath_search('search'), { DomainName, actionFormSearch, text, SearchArticlesResult })
+            } catch (err) {
+                console.log(text)
+                console.log(err);
             }
-            //читаем файл html и загружаем данные из БД коллекции articles,indexes
-            res.render(createPath_search('search'), { DomainName, actionFormSearch, text, SearchArticlesResult })
-        } catch (e) {
-            console.log(e);
         }
     }
 }
