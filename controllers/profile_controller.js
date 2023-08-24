@@ -1,6 +1,6 @@
 const {createPath_profile} = require('../path/create-path')
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class profileController {
     async profileEn(req, res) {
