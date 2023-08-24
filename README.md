@@ -17,3 +17,5 @@ The project was developed on the principle of MVC (model-view-controller)
 
 Technologies used: node.js, ejs, express, mongoose, mongoDB
 
+
+![Banders.png]()
