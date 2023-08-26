@@ -17,3 +17,4 @@ The project was developed on the principle of MVC (model-view-controller)
 
 Technologies used: node.js, ejs, express, mongoose, mongoDB
 
+![Banders](https://github.com/IvanEr-ui/banders/assets/79088192/b6e1bc63-5640-4b7c-abac-9a384241588a)

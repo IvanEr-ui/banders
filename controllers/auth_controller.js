@@ -3,7 +3,7 @@ const EnArticles = require('../models/languages/enarticles_model')
 const Filter = require('../models/filter_model')
 const unirest = require('unirest')
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class authController {
     async registration_discord(req, res) {

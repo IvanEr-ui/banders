@@ -15,7 +15,7 @@ const Articles = [
     { code: 'uk', categories: "категорії", model: 'ukarticles_model' },
 ];
 
-const DomainName = "http://localhost:4000/"
+const DomainName = "https://banders.onrender.com/"
 
 class searchController {
     async loadLanguageModel(modelPath) {

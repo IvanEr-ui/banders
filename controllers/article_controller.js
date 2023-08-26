@@ -1,7 +1,7 @@
 const { createPath_article } = require('../path/create-path');
 const Filter = require('../models/filter_model');
 const NavMenu = require('../models/navmenu_model');
-const DomainName = "http://localhost:4000/";
+const DomainName = "https://banders.onrender.com/";
 
 const Articles = [
     { code: '', categories: "categories", model: 'enarticles_model' },
