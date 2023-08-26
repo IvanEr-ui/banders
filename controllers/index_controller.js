@@ -36,7 +36,7 @@ class indexController {
                     filter = await Filter.find({ language: "en" });
                 }
                 const languageModel = await this.loadLanguageModel(model);
-                const articlesClient = await languageModel.find({});
+                const articlesClient = await languageModel.find({}).sort({ id: 1 });
 
                 //читаем файл html и загружаем данные из БД коллекции articles,indexes
                 res.render(createPath_index("index"), { articlesClient, DomainName, actionFormSearch, filter: filter[0] })
