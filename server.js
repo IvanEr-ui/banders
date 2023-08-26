@@ -36,12 +36,7 @@ app.use(search_route);
 app.use(article_route);
 
 // Запускаем веб-скрапинг и сохранение данных в MongoDB каждую неделю
-<<<<<<< HEAD
-DayMonitoringArticle();
 setInterval(DayMonitoringArticle, 24 * 60 * 60 * 1000); // Каждую день
-=======
-setInterval(ScriptArticles, 7 * 24 * 60 * 60 * 1000); // Каждую неделю
->>>>>>> a97de9d16b58379df3bb5fadd853081b7c7b3d60
 const start = async () => {
     try {
         //подключаемся к БД и ждем пока он не выполниться(await)
