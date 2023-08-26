@@ -132,8 +132,7 @@ const saveArticlesInDB = async (ArticleModel, allArticles) => {
 // Перевод и загрузка JSON файла
 const translateAndDownloadJSON = async (page, path, TargetLanguage) => {
     try {
-        page.setDefaultTimeout(600000); // Устанавливаем таймаут для страницы
-        await page.goto('https://translate.i18next.com/', { timeout: 3000000, waitUntil: 'domcontentloaded' });
+        await page.goto('https://translate.i18next.com/', { timeout: 3000000, waitUntil: 'domcontentloaded'});
         const inputUploadHandle = await page.$('input[type=file]');
         await inputUploadHandle.uploadFile(path);
 
@@ -143,11 +142,12 @@ const translateAndDownloadJSON = async (page, path, TargetLanguage) => {
             const targetLngInput = document.querySelector('#targetLng');
             targetLngInput.setAttribute('value', ''); // Удаление начального значения    
         });
+        await page.waitForTimeout(2000);
 
         await page.type('#targetLng', TargetLanguage);
         await page.click('.conv-btn');
 
-        await page.waitForTimeout(100000);
+        await page.waitForTimeout(80000);
 
         // Получение переведенного JSON
         const TranslateData = await page.$eval('#targetJSON', (textarea) => textarea.value);
@@ -189,8 +189,7 @@ async function scrapeAndSaveArticles() {
         headless: false,
         //открываем инструменты разработчика
         devtools: true,
-        timeout: 600000,
-        defaultViewport: null,
+        timeout: 6000000,
     });
 
     try {
