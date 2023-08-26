@@ -83,7 +83,7 @@ const CheckDBLastANDParseArticle = async (ArticleModel, LatestArticle) => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        const LatestArticleDB = await ArticleModel.findOne({}).sort({ id: -1 });
+        const LatestArticleDB = await ArticleModel.findOne({}).sort({ id: -1 }).limit( 1 );
 
         if (LatestArticleDB.link === LatestArticle[0].link) {
             console.log("Статья есть в БД, BandProtocol еще не опубликовал новую статью")
